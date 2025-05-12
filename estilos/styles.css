@@ -1,0 +1,36 @@
+body[data-theme="dark"] {
+    background-color: #121212;
+    color: #eee;
+}
+
+body[data-theme="light"] {
+    background-color: #ffffff;
+    color: #111;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    padding: 1rem;
+    align-items: center;
+}
+
+.lang-switcher,
+.theme-switcher {
+    margin-left: 1rem;
+    padding: 0.5rem;
+}
+
+.menu-item {
+    margin: 1rem 0;
+}
+
+.btn {
+    padding: 0.5rem 1rem;
+    margin-top: 1rem;
+}
+
+#cart {
+    list-style: none;
+    padding: 0;
+}
