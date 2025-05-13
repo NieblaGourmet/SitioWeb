@@ -57,6 +57,25 @@ function sendToWhatsApp() {
   window.open(url, "_blank");
 }
 
+function filterMenu() {
+  const category = document.getElementById('category').value;
+  const items = document.querySelectorAll('.menu-item');
+  items.forEach(item => {
+    if (category === 'all' || item.dataset.category === category) {
+      item.style.display = 'block';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
+function toggleCart() {
+  const cartSidebar = document.getElementById('cartSidebar');
+  const cartToggle = document.getElementById('cartToggle');
+  cartSidebar.classList.toggle('open');
+  cartToggle.classList.toggle('hidden');
+}
+
 function showNotification(msg) {
   const notif = document.getElementById("notifModalBody");
   notif.textContent = msg;

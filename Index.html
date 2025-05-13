@@ -8,102 +8,6 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="estilos/styles.css">
-    <style>
-        /* Ajustes para tema oscuro */
-        body[data-theme="dark"] {
-            background-color: #121212;
-            color: #ffffff;
-        }
-
-        body[data-theme="dark"] .text-muted {
-            color: #b0b0b0 !important;
-        }
-
-        /* Ajustes para dispositivos móviles */
-        @media (max-width: 768px) {
-            .d-flex {
-                flex-direction: column;
-            }
-
-            .w-75,
-            .w-25 {
-                width: 100% !important;
-            }
-
-            .pe-3 {
-                padding-right: 0 !important;
-            }
-        }
-
-        /* Botón flotante */
-        #cartToggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1050;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 50px;
-            height: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
-
-        /* Botón flotante oculto */
-        #cartToggle.hidden {
-            display: none;
-        }
-
-        /* Menú lateral */
-        #cartSidebar {
-            position: fixed;
-            top: 0;
-            right: -300px;
-            width: 300px;
-            height: 100%;
-            background-color: #ffffff;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.1);
-            overflow-y: auto;
-            transition: right 0.3s ease-in-out;
-            z-index: 1040;
-            padding-bottom: 80px;
-        }
-
-        #cartSidebar.open {
-            right: 0;
-        }
-
-        #cartSidebar .cart-header {
-            background-color: #28a745;
-            color: white;
-            padding: 1rem;
-            text-align: center;
-            position: relative;
-        }
-
-        #cartSidebar .close-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: none;
-            border: none;
-            color: white;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Ajustar botón de pedido al final del carrito */
-        #orderButton {
-            position: absolute;
-            bottom: 20px;
-            left: 20px;
-            right: 20px;
-        }
-    </style>
 </head>
 
 <body data-theme="dark" class="container">
@@ -184,26 +88,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="scripts/cart.js"></script>
     <script src="scripts/main.js"></script>
-    <script>
-        function filterMenu() {
-            const category = document.getElementById('category').value;
-            const items = document.querySelectorAll('.menu-item');
-            items.forEach(item => {
-                if (category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'block';
-                } else {
-                    item.style.display = 'none';
-                }
-            });
-        }
-
-        function toggleCart() {
-            const cartSidebar = document.getElementById('cartSidebar');
-            const cartToggle = document.getElementById('cartToggle');
-            cartSidebar.classList.toggle('open');
-            cartToggle.classList.toggle('hidden');
-        }
-    </script>
 </body>
 
 </html>
