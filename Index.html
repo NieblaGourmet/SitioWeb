@@ -1,97 +1,730 @@
 <!DOCTYPE html>
+
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
     <title>Niebla Gourmet</title>
-    
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <link rel="stylesheet" href="estilos/styles.css">
-    <link rel="stylesheet" href="estilos/index.css">
-    
-    <!--script src="scripts/horario.js"></script-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
+    <link href="estilos/styles.css" rel="stylesheet" />
+    <link href="estilos/index.css" rel="stylesheet" />
+    <style>
+        /* Estilos mejorados para el menú */
+        .menu-item {
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.12);
+        }
+
+        .item-name {
+            color: var(--heading-color);
+            font-size: 1.25rem;
+            margin-bottom: 10px;
+            display: block;
+            font-weight: 600;
+        }
+
+        .item-price {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+        }
+
+        .btn-add {
+            background: var(--primary-color);
+            border: none;
+            padding: 8px 16px;
+            border-radius: 8px;
+            transition: all 0.3s;
+            font-weight: 500;
+            color: white;
+        }
+
+        .btn-add:hover {
+            background: var(--primary-hover);
+            transform: scale(1.02);
+            color: white;
+        }
+
+        .category-title {
+            margin-top: 40px;
+            margin-bottom: 25px;
+            color: var(--heading-color);
+            border-bottom: 2px solid var(--primary-color);
+            padding-bottom: 8px;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .menu-img {
+            height: 140px;
+            width: 100%;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        /* Carrito mejorado */
+        #cartSidebar {
+            width: 350px;
+            background: var(--card-bg);
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            border-left: 1px solid var(--card-border);
+            position: fixed;
+            top: 0;
+            right: -350px;
+            height: 100%;
+            z-index: 1050;
+            transition: right 0.3s ease-in-out;
+        }
+
+        #cartSidebar.show {
+            right: 0;
+        }
+
+        #cartToggle {
+            background: var(--primary-color);
+            color: white;
+            border: none;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transition: all 0.3s;
+            z-index: 1000;
+        }
+
+        #cartToggle:hover {
+            transform: scale(1.1);
+            background: var(--primary-hover);
+        }
+
+        .cart-item {
+            border-bottom: 1px solid var(--card-border);
+            padding: 12px 0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .cart-header {
+            padding: 20px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+        }
+
+        @media (max-width: 768px) {
+            .menu-item {
+                padding: 15px;
+            }
+
+            #cartSidebar {
+                width: 100%;
+            }
+
+            .menu-img {
+                height: 120px;
+            }
+        }
+    </style>
+    <style>
+        body.dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .dark-mode .menu-item,
+        .dark-mode .card {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border-color: #333;
+        }
+
+        .dark-mode button,
+        .dark-mode .btn {
+            background-color: #333;
+            color: #fff;
+            border: 1px solid #555;
+        }
+
+        .dark-mode .text-muted {
+            color: #a0a0a0 !important;
+        }
+
+        .dark-mode .item-name {
+            color: #ffffff;
+        }
+
+        .dark-mode .category-title {
+            color: #ffffff;
+            border-bottom-color: #555;
+        }
+
+        .dark-mode #cartSidebar {
+            background-color: #1e1e1e;
+            color: #e0e0e0;
+            border-left-color: #333;
+        }
+
+        .dark-mode .cart-header {
+            border-bottom-color: #333;
+        }
+
+        .dark-mode .cart-item {
+            border-bottom-color: #333;
+        }
+
+        .dark-mode .close-btn {
+            color: #e0e0e0;
+        }
+    </style>
 </head>
 
-<body data-theme="dark" class="container">
+<body class="dark-mode container">
     <header class="d-flex justify-content-between align-items-center py-3">
         <h1 id="title">Niebla Gourmet</h1>
         <div>
-            <select id="language" class="btn btn-secondary">
+            <select class="btn btn-secondary" id="language">
                 <option value="en">English</option>
-                <option value="es">Spanish</option>
+                <option value="es">Español</option>
             </select>
-            <button id="themeToggle" class="btn btn-secondary theme-switcher">🌙</button>
+            <button class="btn btn-secondary" id="themeToggle">🌙</button>
         </div>
     </header>
-
-    <h2 id="menuTitle" class="my-4">Menu</h2>
+    <h2 class="my-4" id="menuTitle">Menu</h2>
     <div class="d-flex">
         <!-- Productos -->
         <div class="w-100 pe-3">
-            <div class="row d-flex">
-                <div class="col-md-2 mb-3">
-                    <select id="category" class="form-select" onchange="filterMenu()">
-                        <option value="all">All</option>
+            <div class="row d-flex mb-4">
+                <div class="col-md-3 mb-3">
+                    <select class="form-select" id="category" onchange="filterMenu()">
+                        <option value="all">All Categories</option>
                         <option value="breakfast">Breakfast</option>
+                        <option value="appetizers">Appetizers</option>
                         <option value="main">Main Dishes</option>
-                        <option value="snacks">Snacks</option>
                         <option value="desserts">Desserts</option>
                     </select>
                 </div>
             </div>
-            <div id="menu" class="row">
-                <div class="menu-item col-md-6 mb-3" data-category="breakfast">
-                    <span class="item-name fw-bold" data-key="smoothie">Tropical Smoothie</span>
-                    <p class="text-muted">A refreshing blend of tropical fruits.</p>
-                    <button class="btn btn-primary btn-sm" onclick="addToCart('Tropical Smoothie', 5)">Add - $5</button>
+            <div id="menu">
+                <!-- Breakfast Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="category-title" id="breakfast-title">Breakfast</h3>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="breakfast">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Eggs Made to Order" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?eggs" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Eggs Made to Order</span>
+                                    <span class="item-price">$8</span>
+                                </div>
+                                <p class="text-muted small mb-3">Local fresh eggs from free-range hens, made to order:
+                                    scrambled, fried or poached. Served with crispy bacon or fresh arugula and kale
+                                    salad with sourdough bread.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Eggs Made to Order', 8)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="breakfast">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Homemade Granola" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?granola" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Homemade Granola &amp; Artisan Yogurt</span>
+                                    <span class="item-price">$7</span>
+                                </div>
+                                <p class="text-muted small mb-3">Homemade granola with oats, seeds and dried fruits.
+                                    Served with artisanal yogurt and fresh seasonal fruits.</p>
+                                <button class="btn btn-add btn-sm"
+                                    onclick="addToCart('Homemade Granola &amp; Yogurt', 7)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="breakfast">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="French Toast" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?french-toast" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Cloud Forest French Toast</span>
+                                    <span class="item-price">$9</span>
+                                </div>
+                                <p class="text-muted small mb-3">Artisanal brioche bread soaked in egg mixture with
+                                    cinnamon, served with fresh fruit, maple syrup and icing sugar.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Cloud Forest French Toast', 9)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="breakfast">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Costa Rican Breakfast" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?breakfast" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Traditional Costa Rican Breakfast</span>
+                                    <span class="item-price">$10</span>
+                                </div>
+                                <p class="text-muted small mb-3">Gallo pinto, eggs to order, corn tortillas, fried ripe
+                                    plantain and sour cream.</p>
+                                <button class="btn btn-add btn-sm"
+                                    onclick="addToCart('Traditional Costa Rican Breakfast', 10)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="breakfast">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Monteverde Omelette" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?omelette" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Monteverde Omelette</span>
+                                    <span class="item-price">$11</span>
+                                </div>
+                                <p class="text-muted small mb-3">Local eggs with choice of: onion, sweet pepper, cherry
+                                    tomato, mozzarella, spinach, mushrooms, ham. Served with sourdough toast and arugula
+                                    salad.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Monteverde Omelette', 11)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="menu-item col-md-6 mb-3" data-category="main">
-                    <span class="item-name fw-bold" data-key="sandwich">Cheese Sandwich</span>
-                    <p class="text-muted">A classic sandwich with melted cheese.</p>
-                    <button class="btn btn-primary btn-sm" onclick="addToCart('Cheese Sandwich', 6)">Add - $6</button>
+                <!-- Appetizers Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="category-title" id="appetizers-title">Appetizers</h3>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="appetizers">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Squash Cream" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?soup" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Squash Cream with Roasted Garlic</span>
+                                    <span class="item-price">$7</span>
+                                </div>
+                                <p class="text-muted small mb-3">Creamy squash soup with roasted garlic, served with
+                                    avocado mousse.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Squash Cream', 7)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="appetizers">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Arugula Salad" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?salad" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Arugula and Kale Salad</span>
+                                    <span class="item-price">$9</span>
+                                </div>
+                                <p class="text-muted small mb-3">Mix with sautéed mushrooms, prosciutto, parmesan,
+                                    golden berry, cherry tomatoes and red-fruits dressing.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Arugula and Kale Salad', 9)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="appetizers">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Tuna Tartar" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?tuna" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Fresh Tuna Tartar</span>
+                                    <span class="item-price">$12</span>
+                                </div>
+                                <p class="text-muted small mb-3">Served on arugula with corn chips and avocado mousse.
+                                </p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Fresh Tuna Tartar', 12)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <!-- Agrega más productos aquí -->
+                <!-- Main Dishes Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="category-title" id="main-title">Main Dishes</h3>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="main">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Beef Tenderloin" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?steak" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Beef Tenderloin</span>
+                                    <span class="item-price">$22</span>
+                                </div>
+                                <p class="text-muted small mb-3">Served in green pepper sauce with mixed vegetables and
+                                    sweet potato puree.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Beef Tenderloin', 22)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="main">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Pork Ribs" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?ribs" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Premium Pork Ribs</span>
+                                    <span class="item-price">$20</span>
+                                </div>
+                                <p class="text-muted small mb-3">Served in tamarind reduction with fried cassava and
+                                    cabbage salad with coconut mayonnaise.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Premium Pork Ribs', 20)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="main">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Chicken Sous Vide" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?chicken" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Chicken Breast Sous Vide</span>
+                                    <span class="item-price">$18</span>
+                                </div>
+                                <p class="text-muted small mb-3">Cooked in orange liquor reduction with mixed vegetables
+                                    and orange sweet potato puree.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Chicken Breast Sous Vide', 18)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Desserts Section -->
+                <div class="row">
+                    <div class="col-12">
+                        <h3 class="category-title" id="desserts-title">Desserts</h3>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="desserts">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Chocolate Cake" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?chocolate-cake" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Chocolate Cake</span>
+                                    <span class="item-price">$8</span>
+                                </div>
+                                <p class="text-muted small mb-3">Served with Costa Rican pineapple-papaya marmalade and
+                                    vanilla ice cream.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Chocolate Cake', 8)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="desserts">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Cheesecake" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?cheesecake" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Red Fruits Cheesecake</span>
+                                    <span class="item-price">$9</span>
+                                </div>
+                                <p class="text-muted small mb-3">Classic cheesecake topped with red fruits.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Red Fruits Cheesecake', 9)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="menu-item col-lg-6 mb-4" data-category="desserts">
+                        <div class="row g-0">
+                            <div class="col-md-4">
+                                <img alt="Pecan Pie" class="menu-img"
+                                    src="https://source.unsplash.com/random/300x200/?pie" />
+                            </div>
+                            <div class="col-md-8 p-3">
+                                <div class="d-flex justify-content-between align-items-start">
+                                    <span class="item-name fw-bold">Pecan Pie</span>
+                                    <span class="item-price">$8</span>
+                                </div>
+                                <p class="text-muted small mb-3">Traditional pecan pie with rich, sweet filling.</p>
+                                <button class="btn btn-add btn-sm" onclick="addToCart('Pecan Pie', 8)">
+                                    <i class="fas fa-plus me-1"></i> Add to Cart
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-
+    </div>
     <!-- Botón flotante para abrir el carrito -->
     <button id="cartToggle" onclick="toggleCart()">
-        🛒
+        <i class="fas fa-shopping-cart"></i>
+        <span class="cart-count" id="cartCount">0</span>
     </button>
-
     <!-- Menú lateral del carrito -->
     <div id="cartSidebar">
         <div class="cart-header">
-            <h3 id="cartTitle">Cart</h3>
-            <button class="close-btn" onclick="toggleCart()">&times;</button>
+            <h3 id="cartTitle">Your Order</h3>
+            <button class="close-btn" onclick="toggleCart()">×</button>
         </div>
-        <ul id="cart" class="list-group p-3"></ul>
-        <p id="total" class="fw-bold px-3">Total: $0</p>
-        <button class="btn btn-success" onclick="sendToWhatsApp()" id="orderButton">Order por WhatsApp</button>
-    </div>
-
-    <!-- Modal de notificación -->
-    <div class="modal fade" id="notifModal" tabindex="-1" aria-labelledby="notifModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="notifModalLabel">Notificación</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body" id="notifModalBody">
-                    <!-- Mensaje de notificación -->
-                </div>
+        <div class="cart-body p-3">
+            <ul class="list-group mb-3" id="cart"></ul>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>Subtotal:</span>
+                <span id="subtotal">$0</span>
             </div>
+            <div class="d-flex justify-content-between align-items-center mb-2">
+                <span>Tax (10%):</span>
+                <span id="tax">$0</span>
+            </div>
+            <div class="d-flex justify-content-between align-items-center mb-3">
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold" id="total">$0</span>
+            </div>
+            <button class="btn btn-success w-100 py-2" id="orderButton" onclick="sendToWhatsApp()">
+                <i class="fab fa-whatsapp me-2"></i> Order via WhatsApp
+            </button>
         </div>
     </div>
-
-    <!-- Bootstrap JS -->
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="scripts/cart.js"></script>
-    <script src="scripts/main.js"></script>
+    <script>
+        // Funciones mejoradas de filtrado y búsqueda
+        function filterMenu() {
+            const category = document.getElementById('category').value;
+            const items = document.querySelectorAll('.menu-item');
+            const categoryTitles = document.querySelectorAll('.category-title');
+
+            items.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+
+            categoryTitles.forEach(title => {
+                if (category === 'all' || title.id.includes(category)) {
+                    title.style.display = 'block';
+                } else {
+                    title.style.display = 'none';
+                }
+            });
+        }
+
+        // Carrito mejorado
+        let cart = [];
+
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+
+            updateCart();
+        }
+
+        function updateCart() {
+            const cartList = document.getElementById('cart');
+            cartList.innerHTML = '';
+
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const li = document.createElement('li');
+                li.className = 'list-group-item cart-item d-flex justify-content-between align-items-center';
+
+                const itemInfo = document.createElement('div');
+                itemInfo.innerHTML = `<span class="fw-bold">${item.name}</span><br>
+                                     <small class="text-muted">$${item.price} x ${item.quantity}</small>`;
+
+                const itemTotal = document.createElement('span');
+                itemTotal.className = 'fw-bold';
+                itemTotal.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+
+                const removeBtn = document.createElement('button');
+                removeBtn.className = 'btn btn-sm btn-outline-danger';
+                removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+                removeBtn.onclick = () => removeFromCart(item.name);
+
+                const btnGroup = document.createElement('div');
+                btnGroup.className = 'btn-group';
+
+                const minusBtn = document.createElement('button');
+                minusBtn.className = 'btn btn-sm btn-outline-secondary';
+                minusBtn.innerHTML = '<i class="fas fa-minus"></i>';
+                minusBtn.onclick = () => updateQuantity(item.name, -1);
+
+                const plusBtn = document.createElement('button');
+                plusBtn.className = 'btn btn-sm btn-outline-secondary';
+                plusBtn.innerHTML = '<i class="fas fa-plus"></i>';
+                plusBtn.onclick = () => updateQuantity(item.name, 1);
+
+                btnGroup.appendChild(minusBtn);
+                btnGroup.appendChild(plusBtn);
+
+                li.appendChild(itemInfo);
+                li.appendChild(itemTotal);
+                li.appendChild(btnGroup);
+                li.appendChild(removeBtn);
+
+                cartList.appendChild(li);
+
+                subtotal += item.price * item.quantity;
+            });
+
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+
+            document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
+            document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
+            document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+            document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCart();
+        }
+
+        function updateQuantity(name, change) {
+            const item = cart.find(item => item.name === name);
+            if (item) {
+                item.quantity += change;
+
+                if (item.quantity <= 0) {
+                    removeFromCart(name);
+                } else {
+                    updateCart();
+                }
+            }
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cartSidebar');
+            sidebar.classList.toggle('show');
+        }
+
+        function sendToWhatsApp() {
+            if (cart.length === 0) {
+                return;
+            }
+
+            let message = 'Hello! I would like to order:\n\n';
+
+            cart.forEach(item => {
+                message += `${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}\n`;
+            });
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const tax = subtotal * 0.10;
+            const total = subtotal + tax;
+
+            message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
+            message += `Tax (10%): $${tax.toFixed(2)}\n`;
+            message += `Total: $${total.toFixed(2)}\n\n`;
+            message += 'Thank you!';
+
+            const encodedMessage = encodeURIComponent(message);
+            const whatsappUrl = `https://wa.me/50662196744?text=${encodedMessage}`;
+
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Inicializar el carrito
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCart();
+
+            // Configurar el tema oscuro/claro
+            const themeToggle = document.getElementById('themeToggle');
+            themeToggle.addEventListener('click', function () {
+                document.body.classList.toggle('dark-mode');
+                const isDarkMode = document.body.classList.contains('dark-mode');
+                themeToggle.textContent = isDarkMode ? '☀️' : '🌙';
+            });
+
+            // Configurar el selector de idioma
+            const languageSelector = document.getElementById('language');
+            languageSelector.addEventListener('change', function () {
+                // Aquí podrías implementar la lógica para cambiar el idioma
+                console.log("Idioma seleccionado:", this.value);
+            });
+        });
+    </script>
 </body>
 
 </html>

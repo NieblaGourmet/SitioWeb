@@ -75,17 +75,3 @@ function toggleCart() {
   cartSidebar.classList.toggle('open');
   cartToggle.classList.toggle('hidden');
 }
-
-function showNotification(msg) {
-  const notif = document.getElementById("notifModalBody");
-  notif.textContent = msg;
-
-  // Asegúrate de que el modal se inicialice correctamente
-  const notifModal = new bootstrap.Modal(document.getElementById("notifModal"));
-  notifModal.show();
-
-  // Oculta el modal automáticamente después de 1.5 segundos
-  setTimeout(() => {
-    notifModal.hide();
-  }, 1500);
-}
