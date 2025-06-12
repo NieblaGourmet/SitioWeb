@@ -152,7 +152,7 @@ sup {
 }
 
 a {
-  color: #FF6600;
+  color: #af9154;
   text-decoration: none;
   background-color: transparent;
 }
@@ -9525,7 +9525,11 @@ button.bg-dark:focus {
 }
 
 .text-primary {
-  color: #FF6600 !important;
+  color: #02331e !important;
+}
+
+.text-gold {
+  color: #af9154 !important;
 }
 
 a.text-primary:hover, a.text-primary:focus {
