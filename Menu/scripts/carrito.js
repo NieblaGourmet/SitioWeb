@@ -30,8 +30,7 @@ function updateCart() {
 
     // Contenedor general tipo fila
     const rowContainer = document.createElement('div');
-    rowContainer.className = 'w-100';
-
+  
     // Contenedor izquierdo: texto
     const priceDiv = document.createElement('div');
     priceDiv.innerHTML = `$${item.price} x ${item.quantity} = <span class="fw-bold">$${(item.price * item.quantity).toFixed(2)}</span>`;
@@ -52,7 +51,8 @@ function updateCart() {
 
     const removeBtn = document.createElement('button');
     removeBtn.className = 'btn btn-sm btn-outline-danger';
-    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+    removeBtn.style = 'margin-left: 10px;';
+    removeBtn.innerHTML = '<i class="fa-solid fa-trash"></i>';
     removeBtn.onclick = () => removeFromCart(item.name);
 
     // Agregar botones
