@@ -10,6 +10,9 @@ function addToCart(name, price) {
   }
 
   updateCart();
+
+  // Mostrar Toast
+  showToast(`${name}`);
 }
 
 function updateCart() {
@@ -169,4 +172,18 @@ function sendToWhatsApp() {
   const whatsappUrl = `https://wa.me/50662196744?text=${encodedMessage}`;
 
   window.open(whatsappUrl, '_blank');
+}
+
+// Mostrar Toast
+function showToast(message) {
+  const toast = document.createElement('div');
+  toast.className = 'toast show position-fixed bottom-0 end-0 m-3 bg-success text-white px-3 py-2 rounded shadow';
+  toast.style.zIndex = 9999;
+  toast.textContent = message;
+
+  document.body.appendChild(toast);
+
+  setTimeout(() => {
+    toast.remove();
+  }, 2000);
 }
