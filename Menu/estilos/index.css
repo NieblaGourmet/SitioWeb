@@ -84,7 +84,6 @@ header {
 
 /* Ajustar botón de pedido al final del carrito */
 #orderButton {
-    position: absolute;
     bottom: 20px;
     left: 20px;
     right: 20px;

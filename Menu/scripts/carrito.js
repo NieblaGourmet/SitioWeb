@@ -20,24 +20,26 @@ function updateCart() {
 
   cart.forEach(item => {
     const li = document.createElement('li');
-    li.className = 'list-group-item cart-item d-flex justify-content-between align-items-center';
+    li.className = 'list-group-item cart-item';
 
-    const itemInfo = document.createElement('div');
-    itemInfo.innerHTML = `<span class="fw-bold">${item.name}</span><br>
-                                     <small class="text-muted">$${item.price} x ${item.quantity}</small>`;
+    // Línea 1: Nombre
+    const nameDiv = document.createElement('div');
+    nameDiv.className = 'fw-bold mb-1';
+    nameDiv.style = 'padding-left: 5px;';
+    nameDiv.textContent = item.name;
 
-    const itemTotal = document.createElement('span');
-    itemTotal.className = 'fw-bold';
-    itemTotal.textContent = `$${(item.price * item.quantity).toFixed(2)}`;
+    // Contenedor general tipo fila
+    const rowContainer = document.createElement('div');
+    rowContainer.className = 'w-100';
 
-    const removeBtn = document.createElement('button');
-    removeBtn.className = 'btn btn-sm btn-outline-danger';
-    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
-    removeBtn.onclick = () => removeFromCart(item.name);
+    // Contenedor izquierdo: texto
+    const priceDiv = document.createElement('div');
+    priceDiv.innerHTML = `$${item.price} x ${item.quantity} = <span class="fw-bold">$${(item.price * item.quantity).toFixed(2)}</span>`;
 
-    const btnGroup = document.createElement('div');
-    btnGroup.className = 'btn-group';
+    // Contenedor derecho: botones
+    const btnRow = document.createElement('div');
 
+    // Botones pequeños
     const minusBtn = document.createElement('button');
     minusBtn.className = 'btn btn-sm btn-outline-secondary';
     minusBtn.innerHTML = '<i class="fas fa-minus"></i>';
@@ -48,25 +50,61 @@ function updateCart() {
     plusBtn.innerHTML = '<i class="fas fa-plus"></i>';
     plusBtn.onclick = () => updateQuantity(item.name, 1);
 
-    btnGroup.appendChild(minusBtn);
-    btnGroup.appendChild(plusBtn);
+    const removeBtn = document.createElement('button');
+    removeBtn.className = 'btn btn-sm btn-outline-danger';
+    removeBtn.innerHTML = '<i class="fas fa-times"></i>';
+    removeBtn.onclick = () => removeFromCart(item.name);
 
-    li.appendChild(itemInfo);
-    li.appendChild(itemTotal);
-    li.appendChild(btnGroup);
-    li.appendChild(removeBtn);
+    // Agregar botones
+    btnRow.appendChild(minusBtn);
+    btnRow.appendChild(plusBtn);
+    btnRow.appendChild(removeBtn);
+
+    // Agregar texto y botones al contenedor
+    rowContainer.appendChild(priceDiv);
+    rowContainer.appendChild(btnRow);
+
+    li.appendChild(nameDiv);
+    li.appendChild(priceDiv);
+    li.appendChild(btnRow);
 
     cartList.appendChild(li);
 
     subtotal += item.price * item.quantity;
   });
 
-  const tax = subtotal * 0.10;
+  const tax = subtotal * 0.13;
   const total = subtotal + tax;
 
-  document.getElementById('subtotal').textContent = `$${subtotal.toFixed(2)}`;
-  document.getElementById('tax').textContent = `$${tax.toFixed(2)}`;
-  document.getElementById('total').textContent = `$${total.toFixed(2)}`;
+  // Tabla para subtotal, tax y total + botón WhatsApp
+  const summaryTable = `
+    <table class="table table-bordered text-center mt-3 mb-0">
+      <thead>
+        <tr>
+          <th>Subtotal</th>
+          <th>Tax (13%)</th>
+          <th>Total</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td id="subtotal">$${subtotal.toFixed(2)}</td>
+          <td id="tax">$${tax.toFixed(2)}</td>
+          <td id="total">$${total.toFixed(2)}</td>
+        </tr>
+      </tbody>
+    </table>
+    <button class="btn btn-success w-100" id="orderButton" onclick="sendToWhatsApp()">
+      <i class="fab fa-whatsapp me-2"></i> Order via WhatsApp
+    </button>
+  `;
+
+  // Reemplaza los valores en el DOM
+  const summaryDiv = document.getElementById('cartSummary');
+  if (summaryDiv) {
+    summaryDiv.innerHTML = summaryTable;
+  }
+
   document.getElementById('cartCount').textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
 }
 
@@ -119,11 +157,11 @@ function sendToWhatsApp() {
   });
 
   const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const tax = subtotal * 0.10;
+  const tax = subtotal * 0.13;
   const total = subtotal + tax;
 
   message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
-  message += `Tax (10%): $${tax.toFixed(2)}\n`;
+  message += `Tax (13%): $${tax.toFixed(2)}\n`;
   message += `Total: $${total.toFixed(2)}\n\n`;
   message += 'Thank you!';
 
