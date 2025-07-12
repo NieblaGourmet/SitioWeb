@@ -149,30 +149,34 @@ function toggleCart() {
 }
 
 function sendToWhatsApp() {
-  if (cart.length === 0) {
-    return;
-  }
+  if (cart.length === 0) return;
 
-  let message = 'Hello! I would like to order:\n\n';
+  let message = '*Hola! Me gustaría ordenar:*\n\n';
+
+  let subtotal = 0;
 
   cart.forEach(item => {
-    message += `${item.quantity}x ${item.name} - $${(item.price * item.quantity).toFixed(2)}\n`;
+    const itemTotal = item.price * item.quantity;
+    subtotal += itemTotal;
+    message += `- ${item.name} x ${item.quantity} = $${itemTotal.toFixed(2)}\n`;
   });
 
-  const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
   const tax = subtotal * 0.13;
   const total = subtotal + tax;
 
-  message += `\nSubtotal: $${subtotal.toFixed(2)}\n`;
-  message += `Tax (13%): $${tax.toFixed(2)}\n`;
-  message += `Total: $${total.toFixed(2)}\n\n`;
-  message += 'Thank you!';
+  message += `\n*Subtotal:* $${subtotal.toFixed(2)}\n`;
+  message += `*Impuestos (13%):* $${tax.toFixed(2)}\n`;
+  message += `*Total:* $${total.toFixed(2)}\n`;
 
   const encodedMessage = encodeURIComponent(message);
-  const whatsappUrl = `https://wa.me/50662196744?text=${encodedMessage}`;
+  const whatsappUrl = `https://wa.me/50661521261?text=${encodedMessage}`;
+
+  // Puedes verificar que esté bien:
+  console.log(whatsappUrl);
 
   window.open(whatsappUrl, '_blank');
 }
+
 
 // Mostrar Toast
 function showToast(message) {
