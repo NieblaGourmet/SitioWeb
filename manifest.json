@@ -1,0 +1,21 @@
+{
+  "name": "Niebla Gourmet",
+  "short_name": "Niebla",
+  "description": "Alta cocina con Alma de Monteverde",
+  "start_url": "/index.html",
+  "display": "standalone",
+  "background_color": "#00180d",
+  "theme_color": "#a2d1b3",
+  "icons": [
+    {
+      "src": "https://lh3.googleusercontent.com/aida/ADBb0ui_n6c3U03f1roC638x7wK5_cYQgoUwD-k01yImGcDsK4p5z2WaAzBZNr56gPIYSVTzUvyTvSJS518wMwIkhz6NKF3ISpgY7JNDqTeU_U9NGaE0dVdTlUQbOURtMT44g5gpNr3PWa5S3N-hTZyLBgi1nP9KJmD2iTnPXQYpvCg6sZMMif7QVYpi3-Xq2VuHv7mhesUMGfsuCvyVvHtjBBpEZ3m0tvaSq7699gUhJgP44wMV5h9nFP9snn8",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "https://lh3.googleusercontent.com/aida/ADBb0ui_n6c3U03f1roC638x7wK5_cYQgoUwD-k01yImGcDsK4p5z2WaAzBZNr56gPIYSVTzUvyTvSJS518wMwIkhz6NKF3ISpgY7JNDqTeU_U9NGaE0dVdTlUQbOURtMT44g5gpNr3PWa5S3N-hTZyLBgi1nP9KJmD2iTnPXQYpvCg6sZMMif7QVYpi3-Xq2VuHv7mhesUMGfsuCvyVvHtjBBpEZ3m0tvaSq7699gUhJgP44wMV5h9nFP9snn8",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

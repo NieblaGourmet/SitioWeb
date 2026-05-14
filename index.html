@@ -1,13 +1,322 @@
 <!DOCTYPE html>
-<html lang="es">
+<html class="dark" lang="es">
+
 <head>
-    <meta charset="UTF-8">
-    <title>Redireccionando...</title>
-    <script>
-        window.location.href = "QR.html";
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Niebla Gourmet">
+    <meta name="theme-color" content="#00180d">
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon"
+        href="https://lh3.googleusercontent.com/aida/ADBb0ui_n6c3U03f1roC638x7wK5_cYQgoUwD-k01yImGcDsK4p5z2WaAzBZNr56gPIYSVTzUvyTvSJS518wMwIkhz6NKF3ISpgY7JNDqTeU_U9NGaE0dVdTlUQbOURtMT44g5gpNr3PWa5S3N-hTZyLBgi1nP9KJmD2iTnPXQYpvCg6sZMMif7QVYpi3-Xq2VuHv7mhesUMGfsuCvyVvHtjBBpEZ3m0tvaSq7699gUhJgP44wMV5h9nFP9snn8">
+
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "primary": "#a2d1b3",
+                        "on-primary": "#083822",
+                        "primary-container": "#02331e",
+                        "on-primary-container": "#6f9d81",
+                        "secondary": "#b6cea6",
+                        "on-secondary": "#233519",
+                        "secondary-container": "#3b4e30",
+                        "on-secondary-container": "#a8bf98",
+                        "tertiary": "#e4c280",
+                        "on-tertiary": "#402d00",
+                        "tertiary-container": "#3a2900",
+                        "on-tertiary-container": "#ad8f52",
+                        "error": "#ffb4ab",
+                        "on-error": "#690005",
+                        "background": "#00180d",
+                        "on-background": "#f4ebe1",
+                        "surface": "#00180d",
+                        "on-surface": "#ccead7",
+                        "surface-variant": "#203a2d",
+                        "on-surface-variant": "#c1c9c1",
+                        "outline": "#8b938c",
+                        "outline-variant": "#414943",
+                        "surface-container-lowest": "#001209",
+                        "surface-container-low": "#062015",
+                        "surface-container": "#0a2419",
+                        "surface-container-high": "#152f23",
+                        "surface-container-highest": "#203a2d",
+                        "antique-gold": "#af9154",
+                        "forest-dark": "#011a0f",
+                        "cream-contrast": "#f4ebe1"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "12px",
+                        "lg": "16px",
+                        "xl": "24px",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "margin-desktop": "80px",
+                        "container-max": "1280px",
+                        "margin-mobile": "20px"
+                    },
+                    "fontFamily": {
+                        "sans": ["Montserrat", "sans-serif"],
+                        "serif": ["Playfair Display", "serif"],
+                        "body-md": ["Montserrat"],
+                        "label-sm": ["Montserrat"],
+                        "headline-xl": ["Playfair Display"],
+                        "headline-lg": ["Playfair Display"],
+                        "body-lg": ["Montserrat"],
+                        "headline-xl-mobile": ["Playfair Display"],
+                        "headline-md": ["Playfair Display"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "label-sm": ["12px", { "lineHeight": "1", "letterSpacing": "0.1em", "fontWeight": "700" }],
+                        "headline-xl": ["48px", { "lineHeight": "1.1", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "headline-lg": ["36px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl-mobile": ["36px", { "lineHeight": "1.2", "fontWeight": "700" }],
+                        "headline-md": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }]
+                    }
+                },
+            },
+        }
     </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: #011a0f;
+            overflow-x: hidden;
+        }
+
+        /* Scroll suave y funcional */
+        .scroll-container {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            -webkit-overflow-scrolling: touch;
+            scroll-behavior: smooth;
+        }
+
+        /* Scrollbar elegante y delgado */
+        .scroll-container::-webkit-scrollbar {
+            width: 4px;
+        }
+
+        .scroll-container::-webkit-scrollbar-track {
+            background: #0a2419;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb {
+            background: #af9154;
+            border-radius: 10px;
+        }
+
+        .scroll-container::-webkit-scrollbar-thumb:hover {
+            background: #c4a460;
+        }
+
+        .dotted-leader {
+            border-bottom: 1px dashed #8b938c;
+            flex-grow: 1;
+            margin: 0 8px;
+            height: 1px;
+            align-self: center;
+        }
+
+        .glass-card {
+            background: linear-gradient(135deg, rgba(32, 58, 45, 0.95) 0%, rgba(26, 54, 41, 0.98) 100%);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            border: 1px solid rgba(175, 145, 84, 0.4);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #af9154 0%, #8c7342 100%);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .btn-primary:active {
+            transform: scale(0.97);
+            box-shadow: 0 2px 8px rgba(175, 145, 84, 0.3);
+        }
+
+        .btn-social {
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .btn-social:active {
+            transform: scale(0.95);
+        }
+
+        #install-button {
+            display: none;
+        }
+
+        /* Aseguramos que el contenido esté centrado */
+        .content-center {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+        }
+    </style>
 </head>
+
 <body>
-    Si no eres redirigido automáticamente, <a href="QR.html">haz clic aquí</a>.
+    <div class="scroll-container">
+        <div class="content-center w-full max-w-md mx-auto px-5 py-8">
+            <!-- Header Section -->
+            <div class="flex flex-col items-center text-center mb-10">
+                <div class="relative mb-6">
+                    <div
+                        class="w-28 h-28 rounded-full overflow-hidden border-2 border-antique-gold p-1 bg-surface-container-low shadow-2xl">
+                        <img alt="Niebla Gourmet Logo" class="w-full h-full object-cover rounded-full"
+                            src="./img/logo.png" />
+                    </div>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2 tracking-tight">Niebla Gourmet
+                </h1>
+                <p class="text-lg text-secondary italic opacity-80">Alta cocina con Alma de Monteverde</p>
+            </div>
+
+            <!-- Main Action Buttons -->
+            <div class="w-full flex flex-col gap-4 mb-10">
+                <button
+                    class="w-full py-5 btn-primary text-on-primary font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 shadow-lg">
+                    <i class="fas fa-utensils text-base"></i>
+                    <span>Ver Menú</span>
+                </button>
+                <button
+                    class="w-full py-5 bg-transparent border-2 border-antique-gold text-antique-gold font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 transition-all hover:bg-antique-gold/10 active:scale-95">
+                    <i class="fas fa-fire-burner text-base"></i>
+                    <span>Servicio de Chef Personal</span>
+                </button>
+            </div>
+
+            <!-- Info Card - Totalmente visible -->
+            <div class="w-full glass-card rounded-2xl p-6 mb-10 relative overflow-hidden shadow-xl">
+                <div class="absolute top-0 left-0 w-full h-1 bg-antique-gold"></div>
+
+                <!-- WhatsApp -->
+                <div class="flex items-center gap-5">
+                    <div
+                        class="bg-antique-gold/20 w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border border-antique-gold/20">
+                        <i class="fa-brands fa-whatsapp text-antique-gold text-2xl"></i>
+                    </div>
+                    <div class="flex-1">
+                        <h4
+                            class="font-bold text-[10px] text-primary/70 uppercase tracking-[0.15em] leading-none mb-1.5">
+                            WhatsApp</h4>
+                        <a class="text-base text-antique-gold hover:text-antique-gold/80 font-bold flex items-center gap-2 transition-colors"
+                            href="https://wa.me/50683271956" target="_blank">
+                            <span>+506 8327 1956</span>
+                            <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
+                        </a>
+                        <p class="text-[11px] text-gray-400 mt-0.5">Reservas e información</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Social Buttons -->
+            <div class="w-full mb-8">
+                <div class="grid grid-cols-2 gap-4">
+                    <a class="btn-social flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-[#E1306C] to-[#c72a60] text-white rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all"
+                        href="https://www.instagram.com/nieblagourmet/?utm_source=ig_web_button_share_sheet"
+                        target="_blank">
+                        <i class="fab fa-instagram text-xl"></i>
+                        <span class="font-bold text-sm uppercase">Instagram</span>
+                    </a>
+                    <a class="btn-social flex items-center justify-center gap-3 py-4 bg-gradient-to-r from-[#1877F2] to-[#0f5fc9] text-white rounded-xl shadow-lg hover:shadow-xl active:scale-95 transition-all"
+                        href="https://www.facebook.com/profile.php?id=61577333875480" target="_blank">
+                        <i class="fab fa-facebook-f text-xl"></i>
+                        <span class="font-bold text-sm uppercase">Facebook</span>
+                    </a>
+                </div>
+
+                <!-- Install Button -->
+                <button id="install-button"
+                    class="w-full py-5 bg-surface-container-highest border-2 border-primary/30 text-primary font-bold uppercase tracking-wider transition-all active:scale-95 rounded-xl text-sm flex items-center justify-center gap-3 mt-6 hover:bg-primary/10">
+                    <i class="fas fa-download"></i>
+                    <span>Instalar Aplicación</span>
+                </button>
+            </div>
+
+            <!-- Footer -->
+            <div class="text-center opacity-40 text-xs py-6">
+                <p>&copy; 2026 Niebla Gourmet. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Register Service Worker
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('./sw.js')
+                    .then(reg => console.log('✅ SW Registrado correctamente', reg))
+                    .catch(err => console.log('❌ Error al registrar SW:', err));
+            });
+        }
+
+        // PWA Install Logic
+        let deferredPrompt;
+        const installBtn = document.getElementById('install-button');
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'flex';
+            console.log('✅ PWA lista para instalar');
+        });
+
+        if (installBtn) {
+            installBtn.addEventListener('click', async () => {
+                if (deferredPrompt) {
+                    deferredPrompt.prompt();
+                    const { outcome } = await deferredPrompt.userChoice;
+                    console.log(`📱 Usuario ${outcome === 'accepted' ? 'instaló' : 'canceló'} la instalación`);
+                    deferredPrompt = null;
+                    installBtn.style.display = 'none';
+                }
+            });
+        }
+
+        window.addEventListener('appinstalled', () => {
+            console.log('🎉 Aplicación instalada exitosamente');
+            installBtn.style.display = 'none';
+        });
+
+        // Detectar iOS
+        const isIos = () => {
+            const userAgent = window.navigator.userAgent.toLowerCase();
+            return /iphone|ipad|ipod/.test(userAgent);
+        };
+
+        const isInStandaloneMode = () => ('standalone' in window.navigator) && (window.navigator.standalone);
+
+        if (isIos() && !isInStandaloneMode()) {
+            console.log('📱 iOS detectado - mostrar instrucciones manuales de instalación');
+        }
+    </script>
 </body>
+
 </html>
