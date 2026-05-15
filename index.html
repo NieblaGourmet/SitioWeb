@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" name="viewport" />
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport" />
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Niebla Gourmet">
@@ -113,6 +113,9 @@
             overflow-x: hidden;
             -webkit-overflow-scrolling: touch;
             scroll-behavior: smooth;
+            overscroll-behavior-y: none;
+            padding-top: env(safe-area-inset-top);
+            padding-bottom: env(safe-area-inset-bottom);
         }
 
         /* Scrollbar elegante y delgado */
@@ -155,8 +158,9 @@
         }
 
         .btn-primary:active {
-            transform: scale(0.97);
-            box-shadow: 0 2px 8px rgba(175, 145, 84, 0.3);
+            transform: scale(0.96) translateY(2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            filter: brightness(0.9);
         }
 
         .btn-social {
@@ -190,7 +194,7 @@
                     <div
                         class="w-28 h-28 rounded-full overflow-hidden border-2 border-antique-gold p-1 bg-surface-container-low shadow-2xl">
                         <img alt="Niebla Gourmet Logo" class="w-full h-full object-cover rounded-full"
-                            src="./img/logo.png" />
+                            src="./img/logo.png" loading="lazy" />
                     </div>
                 </div>
                 <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2 tracking-tight">Niebla Gourmet
@@ -200,16 +204,16 @@
 
             <!-- Main Action Buttons -->
             <div class="w-full flex flex-col gap-4 mb-10">
-                <button
-                    class="w-full py-5 btn-primary text-on-primary font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 shadow-lg">
+                <a class="w-full py-5 btn-primary text-on-primary font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 shadow-lg"
+                    href="menu.html">
                     <i class="fas fa-utensils text-base"></i>
                     <span>Ver Menú</span>
-                </button>
-                <button
-                    class="w-full py-5 bg-transparent border-2 border-antique-gold text-antique-gold font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 transition-all hover:bg-antique-gold/10 active:scale-95">
+                </a>
+                <a class="w-full py-5 bg-transparent border-2 border-antique-gold text-antique-gold font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 transition-all hover:bg-antique-gold/10 active:scale-95"
+                    href="#">
                     <i class="fas fa-fire-burner text-base"></i>
                     <span>Servicio de Chef Personal</span>
-                </button>
+                </a>
             </div>
 
             <!-- Info Card - Totalmente visible -->
