@@ -336,6 +336,9 @@
                 <span class="font-label-md text-label-md text-tertiary uppercase tracking-[0.3em] mb-2 block">
                     Menu Desayunos
                 </span>
+                <p class="font-body-md text-secondary/80 max-w-[300px] mx-auto text-sm italic mb-4">
+                    "Desayunos en la Niebla – incluye café de especialidad, fruta fresca y jugo natural de temporada."
+                </p>
                 <div class="w-20 h-px bg-tertiary/50 mx-auto mt-2"></div>
             </div>
         </section>
@@ -351,11 +354,11 @@
     <script>
         // Base de datos de productos
         const products = [
-            { id: 1, name: "Amanecer Típico", price: 20.00, description: "Desayuno tradicional costarricense con gallo pinto, huevos, queso fresco, natilla y plátano maduro asado.", img: "./img/menu/desayunotipico.jpg" },
-            { id: 2, name: "Omelette", price: 20.00, description: "Omelette esponjoso relleno de espinacas frescas, champiñones y queso de cabra, servido con pan artesanal.", img: "./img/menu/omelette.jpeg" },
-            { id: 3, name: "Huevos del Bosque", price: 20.00, description: "Huevos orgánicos revueltos con hongos silvestres, espárragos y un toque de trufa negra.", img: "./img/menu/omelette.jpeg" },
-            { id: 4, name: "Niebla Crocante", price: 20.00, description: "Waffles crujientes de avena y miel, coronados con frutos rojos, yogur cremoso y una llovizna de miel de montaña.", img: "./img/menu/crocante.jpg" },
-            { id: 5, name: "Tostadas", price: 20.00, description: "Tostadas de masa madre con tres toppings: palta y huevo poche, tomate cherry y albahaca, y crema de queso con nueces.", img: "./img/menu/tostadas.jpeg" }
+            { id: 1, name: "Amanecer Típico", price: 20.00, description: "Una celebración de la tradición costarricense: gallo pinto, huevos al gusto, plátano maduro frito, tortillas de maíz y una cremosa natilla.", img: "./img/menu/desayunotipico.jpg" },
+            { id: 2, name: "Omelette", price: 20.00, description: "Huevos frescos de gallina feliz con tu combinación favorita: espinaca, hongos, queso mozzarella, jamón artesanal, tomate cherry y más. Acompañado de pan masa madre y ensalada verde del bosque.", img: "./img/menu/omelette.jpeg" },
+            { id: 3, name: "Huevos del Bosque", price: 20.00, description: "Huevos al gusto (fritos, revueltos o pochados), servidos con tocineta crujiente o ensalada de arúgula y kale, más pan masa madre. Simpleza elevada con ingredientes locales.", img: "./img/menu/huevos.jpg" },
+            { id: 4, name: "Niebla Crocante", price: 20.00, description: "Granola artesanal con yogur casero y frutas frescas de temporada. Un desayuno ligero, lleno de textura, frescura y equilibrio natural.", img: "./img/menu/crocante.jpg" },
+            { id: 5, name: "Tostadas", price: 20.00, description: "Pan brioche artesanal en baño de canela y vainilla, dorado al punto justo. Servidas con frutas frescas, sirope de maple y azúcar glas. Un dulce despertar en el corazón del bosque.", img: "./img/menu/tostadas.jpeg" }
         ];
         let cart = []; // { id, quantity }
 
@@ -560,12 +563,41 @@
         closeBtn?.addEventListener('click', closeDrawer);
         overlay?.addEventListener('click', closeDrawer);
 
-        // checkout simulación
+        // checkout whatsapp integration
         const checkoutFinal = document.getElementById('checkoutBtn');
         if (checkoutFinal) {
             checkoutFinal.addEventListener('click', () => {
                 if (cart.length === 0) return;
-                alert('✨ Pedido recibido. ¡En breve recibirás tu experiencia Niebla Gourmet! ✨');
+
+                let subtotal = 0;
+                let message = "*Nuevo Pedido - Niebla Gourmet* 🌫️\n";
+                message += "--------------------------------\n";
+
+                cart.forEach(item => {
+                    const prod = findProduct(item.id);
+                    if (prod) {
+                        const itemTotal = prod.price * item.quantity;
+                        subtotal += itemTotal;
+                        message += `• ${item.quantity}x ${prod.name} ($${itemTotal.toFixed(2)})\n`;
+                    }
+                });
+
+                const servicio = subtotal * 0.10;
+                const total = subtotal + servicio;
+
+                message += "--------------------------------\n";
+                message += `*Subtotal:* $${subtotal.toFixed(2)}\n`;
+                message += `*Servicio (10%):* $${servicio.toFixed(2)}\n`;
+                message += `*TOTAL:* $${total.toFixed(2)}\n`;
+                message += "--------------------------------\n";
+                message += "_Enviado desde el Menú Digital_";
+
+                const encodedMessage = encodeURIComponent(message);
+                const whatsappUrl = `https://wa.me/50683271956?text=${encodedMessage}`;
+
+                window.open(whatsappUrl, '_blank');
+
+                // Limpiar carrito después de enviar para una mejor UX
                 cart = [];
                 updateCartStorage();
                 closeDrawer();
