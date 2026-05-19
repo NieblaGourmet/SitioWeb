@@ -366,8 +366,19 @@
         <span id="cartCounterBadge" class="cart-badge hidden">0</span>
     </button>
 
+
+
     <main class="pb-24">
         <section class="relative h-[340px] min-h-[300px] flex items-center justify-center overflow-hidden">
+            <nav class="absolute top-0 left-0 w-full flex items-center justify-between px-4 z-50 pt-[calc(16px+env(safe-area-inset-top,0px))]">
+                <a href="index.html" class="w-11 h-11 md:w-12 md:h-12 rounded-full glass-panel border border-tertiary/30 flex items-center justify-center text-tertiary hover:bg-tertiary/10 active:scale-95 transition-all shadow-lg" aria-label="Volver al inicio">
+                    <span class="material-symbols-outlined">arrow_back</span>
+                </a>
+                <button id="floatingLangBtn" onclick="if(typeof openLanguageModal === 'function') openLanguageModal()" class="w-11 h-11 md:w-12 md:h-12 rounded-full glass-panel border border-tertiary/30 flex items-center justify-center text-tertiary hover:bg-tertiary/10 active:scale-95 transition-all shadow-lg relative">
+                    <i class="fa-solid fa-globe text-lg"></i>
+                    <span id="floatingLangBadge" class="absolute -bottom-1 -right-1 bg-[#af9154] text-[#00180d] text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow border border-[#00180d]/20">ES</span>
+                </button>
+            </nav>
             <div class="absolute inset-0 z-0">
                 <img class="w-full h-full object-cover opacity-40" alt="Niebla Gourmet atmospheric forest"
                     src="./img/fondo.png" />
