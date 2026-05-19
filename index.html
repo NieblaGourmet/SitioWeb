@@ -201,7 +201,8 @@
                 </div>
                 <h1 class="text-4xl md:text-5xl font-serif font-bold text-primary mb-2 tracking-tight">Niebla Gourmet
                 </h1>
-                <p class="text-lg text-secondary italic opacity-80" data-translate-key="subtitle">Alta cocina con Alma de Monteverde</p>
+                <p class="text-lg text-secondary italic opacity-80" data-translate-key="subtitle">Alta cocina con Alma
+                    de Monteverde</p>
             </div>
 
             <!-- Main Action Buttons -->
@@ -211,11 +212,12 @@
                     <i class="fas fa-utensils text-base"></i>
                     <span data-translate-key="view_menu">Ver Menú de Desayunos</span>
                 </a>
-                <a class="w-full py-5 bg-transparent border-2 border-antique-gold text-antique-gold font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 transition-all hover:bg-antique-gold/10 active:scale-95"
-                    href="#">
+                <!-- Botón corregido con ID y evento JavaScript -->
+                <button id="chefServiceBtn"
+                    class="w-full py-5 bg-transparent border-2 border-antique-gold text-antique-gold font-bold uppercase tracking-widest rounded-xl text-sm flex items-center justify-center gap-3 transition-all hover:bg-antique-gold/10 active:scale-95 cursor-pointer">
                     <i class="fas fa-fire-burner text-base"></i>
                     <span data-translate-key="chef_service">Servicio de Chef Personal</span>
-                </a>
+                </button>
             </div>
 
             <!-- Info Card - Totalmente visible -->
@@ -237,7 +239,8 @@
                             <span>+506 8327 1956</span>
                             <i class="fa-solid fa-arrow-up-right-from-square text-[10px] opacity-50"></i>
                         </a>
-                        <p class="text-[11px] text-gray-400 mt-0.5" data-translate-key="whatsapp_sub">Reservas e información</p>
+                        <p class="text-[11px] text-gray-400 mt-0.5" data-translate-key="whatsapp_sub">Reservas e
+                            información</p>
                     </div>
                 </div>
             </div>
@@ -274,6 +277,62 @@
     </div>
 
     <script>
+        // Función para obtener el idioma actual (puedes adaptarla según tu sistema de traducción)
+        function getCurrentLanguage() {
+            // Intenta obtener el idioma del localStorage (si lo usa lang.js)
+            const savedLang = localStorage.getItem('language');
+            if (savedLang) return savedLang;
+
+            // Obtener del HTML lang
+            const htmlLang = document.documentElement.lang;
+            if (htmlLang) return htmlLang;
+
+            // Obtener del navegador
+            const browserLang = navigator.language || navigator.userLanguage;
+            if (browserLang.startsWith('es')) return 'es';
+            if (browserLang.startsWith('en')) return 'en';
+
+            // Default español
+            return 'es';
+        }
+
+        // Función para redirigir a WhatsApp con el mensaje según el idioma
+        function redirectToWhatsApp(phoneNumber, messageKey, event) {
+            if (event) event.preventDefault();
+
+            const currentLang = getCurrentLanguage();
+
+            // Mensajes según el idioma
+            const messages = {
+                es: {
+                    chef_service_msg: "Hola, me interesa el Servicio de Chef Personal de Niebla Gourmet. Me gustaría recibir más información sobre menús, precios y disponibilidad. ¡Gracias!"
+                },
+                en: {
+                    chef_service_msg: "Hello, I'm interested in Niebla Gourmet's Personal Chef Service. I would like more information about menus, prices, and availability. Thank you!"
+                }
+            };
+
+            // Obtener el mensaje según el idioma actual
+            let message = messages[currentLang]?.[messageKey] || messages.es[messageKey];
+
+            // Codificar el mensaje para URL
+            const encodedMessage = encodeURIComponent(message);
+
+            // Construir URL de WhatsApp
+            const whatsappUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+            // Redirigir
+            window.open(whatsappUrl, '_blank');
+        }
+
+        // Configurar el botón de Servicio de Chef Personal
+        const chefServiceBtn = document.getElementById('chefServiceBtn');
+        if (chefServiceBtn) {
+            chefServiceBtn.addEventListener('click', function (event) {
+                redirectToWhatsApp('50683271956', 'chef_service_msg', event);
+            });
+        }
+
         // Register Service Worker
         if ('serviceWorker' in navigator) {
             window.addEventListener('load', () => {
@@ -322,6 +381,11 @@
         if (isIos() && !isInStandaloneMode()) {
             console.log('📱 iOS detectado - mostrar instrucciones manuales de instalación');
         }
+
+        // Escuchar cambios de idioma (si lang.js dispara un evento)
+        window.addEventListener('languageChanged', function () {
+            console.log('Idioma cambiado a:', getCurrentLanguage());
+        });
     </script>
 </body>
 

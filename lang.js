@@ -17,6 +17,7 @@ const translations = {
         subtitle: "Alta cocina con Alma de Monteverde",
         view_menu: "Ver Menú de Desayunos",
         chef_service: "Servicio de Chef Personal",
+        chef_service_msg: "Hola, me gustaría obtener más información sobre el servicio de chef personal.",
         whatsapp_label: "WhatsApp",
         whatsapp_sub: "Reservas e información",
         install_app: "Instalar Aplicación",
@@ -59,6 +60,7 @@ const translations = {
         subtitle: "Haute Cuisine with the Soul of Monteverde",
         view_menu: "View Breakfast Menu",
         chef_service: "Personal Chef Service",
+        chef_service_msg: "Hello, I would like to get more information about the personal chef service.",
         whatsapp_label: "WhatsApp",
         whatsapp_sub: "Reservations and information",
         install_app: "Install Application",
@@ -101,6 +103,7 @@ const translations = {
         subtitle: "Haute Cuisine avec l'Âme de Monteverde",
         view_menu: "Voir le Menu du Petit-Déjeuner",
         chef_service: "Service de Chef Personnel",
+        chef_service_msg: "Bonjour, je voudrais obtenir plus d'informations sur le service de chef personnel.",
         whatsapp_label: "WhatsApp",
         whatsapp_sub: "Réservations et informations",
         install_app: "Installer l'Application",
@@ -143,6 +146,7 @@ const translations = {
         subtitle: "Spitzenküche mit der Seele von Monteverde",
         view_menu: "Frühstücksmenü ansehen",
         chef_service: "Persönlicher Chefkoch-Service",
+        chef_service_msg: "Hallo, ich hätte gerne weitere Informationen zum persönlichen Kochservice.",
         whatsapp_label: "WhatsApp",
         whatsapp_sub: "Reservierungen und Informationen",
         install_app: "Anwendung installieren",
@@ -185,6 +189,7 @@ const translations = {
         subtitle: "Alta Cozinha com Alma de Monteverde",
         view_menu: "Ver Menu de Café da Manhã",
         chef_service: "Serviço de Chef Pessoal",
+        chef_service_msg: "Olá, gostaria de obter mais informações sobre o serviço de chef pessoal.",
         whatsapp_label: "WhatsApp",
         whatsapp_sub: "Reservas e informações",
         install_app: "Instalar Aplicativo",
@@ -284,13 +289,13 @@ function injectLanguageMarkup() {
         const btn = document.createElement('button');
         btn.id = 'floatingLangBtn';
         btn.className = 'fixed w-12 h-12 rounded-full glass-card border border-antique-gold/30 flex items-center justify-center text-antique-gold hover:border-antique-gold active:scale-95 transition-all shadow-lg cursor-pointer';
-        
+
         // Inline CSS styling to handle environment safe area inset top
         btn.style.position = 'fixed';
         btn.style.top = 'calc(16px + env(safe-area-inset-top, 0px))';
         btn.style.right = '16px';
         btn.style.zIndex = '990';
-        
+
         btn.innerHTML = `
             <i class="fa-solid fa-globe text-lg"></i>
             <span id="floatingLangBadge" class="absolute -bottom-1 -right-1 bg-antique-gold text-[#00180d] text-[9px] font-bold px-1.5 py-0.5 rounded-full uppercase tracking-wider shadow border border-[#00180d]/20">ES</span>
@@ -335,7 +340,7 @@ function openLanguageModal() {
     const overlay = document.getElementById('languageModalOverlay');
     const modal = document.getElementById('languageModal');
     const closeBtn = document.getElementById('closeLanguageModalBtn');
-    
+
     // Check if we already have a language URL parameter to allow closing it
     const urlParams = new URLSearchParams(window.location.search);
     const hasLang = urlParams.get('lang') && languages.some(l => l.code === urlParams.get('lang'));
@@ -361,11 +366,11 @@ function openLanguageModal() {
 function closeLanguageModal() {
     const overlay = document.getElementById('languageModalOverlay');
     const modal = document.getElementById('languageModal');
-    
+
     overlay.style.opacity = '0';
     modal.classList.remove('scale-100', 'opacity-100');
     modal.classList.add('scale-95', 'opacity-0');
-    
+
     setTimeout(() => {
         overlay.classList.add('invisible', 'pointer-events-none');
         overlay.classList.remove('active');
@@ -376,6 +381,23 @@ function selectLanguage(langCode) {
     const url = new URL(window.location.href);
     url.searchParams.set('lang', langCode);
     window.location.href = url.toString();
+}
+
+// Redirect to WhatsApp reading the language from the URL parameter
+function redirectToWhatsApp(phone, msgKey, event) {
+    if (event) event.preventDefault();
+
+    const urlParams = new URLSearchParams(window.location.search);
+    const lang = urlParams.get('lang') || 'es';
+
+    let msg = "";
+    if (translations[lang] && translations[lang][msgKey]) {
+        msg = encodeURIComponent(translations[lang][msgKey]);
+    } else if (translations['es'] && translations['es'][msgKey]) {
+        msg = encodeURIComponent(translations['es'][msgKey]);
+    }
+
+    window.open(`https://wa.me/${phone}?text=${msg}`, '_blank');
 }
 
 // Function to translate all marked elements in the DOM
@@ -428,9 +450,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
     if (langParam && languages.some(l => l.code === langParam)) {
         currentLang = langParam;
-        applyTranslations(currentLang);
     } else {
         // No valid GET parameter - force open modal
         openLanguageModal();
     }
+    applyTranslations(currentLang);
 });
