@@ -1,8 +1,9 @@
-const CACHE_NAME = 'niebla-gourmet-v2';
+const CACHE_NAME = 'niebla-gourmet-v3';
 const ASSETS = [
   './',
   './index.html',
   './menu.html',
+  './lang.js',
   './manifest.json',
   './img/logo.png',
   './img/fondo.png',
