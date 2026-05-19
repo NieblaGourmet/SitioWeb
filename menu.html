@@ -116,8 +116,8 @@
         body {
             overflow-x: hidden;
             position: relative;
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: calc(env(safe-area-inset-bottom) + 24px);
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 24px);
             min-height: 100vh;
             -webkit-font-smoothing: antialiased;
             -moz-osx-font-smoothing: grayscale;
@@ -149,6 +149,7 @@
             top: 0;
             right: 0;
             bottom: 0;
+            height: 100dvh;
             width: 85%;
             max-width: 400px;
             background: #0a2419;
@@ -163,8 +164,8 @@
             display: flex;
             flex-direction: column;
             overflow-y: auto;
-            padding-top: env(safe-area-inset-top);
-            padding-bottom: env(safe-area-inset-bottom);
+            padding-top: env(safe-area-inset-top, 0px);
+            padding-bottom: env(safe-area-inset-bottom, 0px);
             -webkit-overflow-scrolling: touch;
             overscroll-behavior: contain;
         }
@@ -206,7 +207,8 @@
         /* floating cart button */
         .floating-cart-btn {
             position: fixed;
-            bottom: calc(24px + env(safe-area-inset-bottom));
+            bottom: 24px;
+            bottom: calc(24px + env(safe-area-inset-bottom, 0px));
             right: 20px;
             z-index: 50;
             background: #af9154;
@@ -226,6 +228,15 @@
         .floating-cart-btn:active {
             transform: scale(0.9) translateY(2px);
             background: #c4a460;
+        }
+
+        @keyframes bounceCart {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2) translateY(-10px); }
+            100% { transform: scale(1) translateY(0); }
+        }
+        .animate-bounce-cart {
+            animation: bounceCart 0.4s ease-out;
         }
 
         .cart-badge {
@@ -381,7 +392,15 @@
                 cart.push({ id: productId, quantity: 1 });
             }
             updateCartStorage();
-            // animación opcional: abrir drawer si se desea? solo actualiza.
+            
+            // Animación del botón flotante
+            const btn = document.getElementById('floatingCartBtn');
+            if (btn) {
+                btn.classList.remove('animate-bounce-cart');
+                // Trigger reflow
+                void btn.offsetWidth;
+                btn.classList.add('animate-bounce-cart');
+            }
         }
 
         function removeFromCart(productId) {
@@ -429,7 +448,7 @@
                 </div>
                 <div class="p-6 md:p-7">
                     <h3 class="font-headline-md text-headline-md text-on-surface mb-2 text-xl md:text-2xl">${prod.name}</h3>
-                    <p class="font-body-md text-body-md text-secondary/70 mb-5 line-clamp-2 text-sm md:text-base">${prod.description}</p>
+                    <p class="font-body-md text-body-md text-secondary/70 mb-5 text-sm md:text-base">${prod.description}</p>
                     <button data-id="${prod.id}" class="add-to-cart-btn w-full py-4 border border-secondary/20 font-label-md text-label-md text-tertiary hover:bg-tertiary/10 active:bg-tertiary/20 transition-all flex items-center justify-center gap-2 uppercase tracking-widest rounded-lg">
                         <span class="material-symbols-outlined text-[18px]">add</span>
                         Añadir al Pedido
