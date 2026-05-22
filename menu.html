@@ -356,7 +356,6 @@
                     class="w-full mt-5 bg-[#af9154] text-[#02331e] py-4 rounded-lg font-label-md text-label-md hover:brightness-110 active:scale-[0.98] transition-all uppercase tracking-widest font-bold disabled:opacity-40 disabled:cursor-not-allowed" data-translate-key="place_order">
                     Realizar Pedido
                 </button>
-                <p class="text-center mt-3 font-body-md text-[11px] text-secondary/40 italic" data-translate-key="taxes_included">* Impuestos incluidos</p>
             </div>
         </div>
     </div>
@@ -386,14 +385,10 @@
             </div>
             <div class="relative z-10 text-center px-margin-mobile">
                 <h1 class="font-display-lg text-[44px] md:text-[64px] leading-[1.2] text-on-surface mb-3">
-                    Niebla Gourmet
+                    Desayunos en la Niebla
                 </h1>
-                <span class="font-label-md text-label-md text-tertiary uppercase tracking-[0.3em] mb-2 block" data-translate-key="menu_subtitle">
-                    Menu Desayunos
-                </span>
-                <p class="font-body-md text-secondary/80 max-w-[300px] mx-auto text-sm italic mb-4" data-translate-key="menu_desc">
-                    "Desayunos en la Niebla – incluye café de especialidad, fruta fresca y jugo natural de temporada."
-                </p>
+                <p class="font-body-lg text-secondary leading-relaxed max-w-[520px] mx-auto mb-6 text-base" data-translate-key="menu_subtitle"></p>
+                <p class="font-body-md text-secondary/80 max-w-[480px] mx-auto text-sm leading-relaxed mb-4" data-translate-key="menu_desc"></p>
                 <div class="w-20 h-px bg-tertiary/50 mx-auto mt-2"></div>
             </div>
         </section>
@@ -455,14 +450,6 @@
     </div>
 
     <script>
-        const products = [
-            { id: 1, name: "Amanecer Típico", price: 20.00, description: "Una celebración de la tradición costarricense: gallo pinto, huevos al gusto, plátano maduro frito, tortillas de maíz y una cremosa natilla.", img: "./img/menu/desayunotipico.jpg" },
-            { id: 2, name: "Omelette", price: 20.00, description: "Huevos frescos de gallina feliz con tu combinación favorita: espinaca, hongos, queso mozzarella, jamón artesanal, tomate cherry y más. Acompañado de pan masa madre y ensalada verde del bosque.", img: "./img/menu/omelette.jpeg" },
-            { id: 3, name: "Huevos del Bosque", price: 20.00, description: "Huevos al gusto (fritos, revueltos o pochados), servidos con tocineta crujiente o ensalada de arúgula y kale, más pan masa madre. Simpleza elevada con ingredientes locales.", img: "./img/menu/huevos.jpg" },
-            { id: 4, name: "Niebla Crocante", price: 20.00, description: "Granola artesanal con yogur casero y frutas frescas de temporada. Un desayuno ligero, lleno de textura, frescura y equilibrio natural.", img: "./img/menu/crocante.jpg" },
-            { id: 5, name: "Tostadas", price: 20.00, description: "Pan brioche artesanal en baño de canela y vainilla, dorado al punto justo. Servidas con frutas frescas, sirope de maple y azúcar glas. Un dulce despertar en el corazón del bosque.", img: "./img/menu/tostadas.jpeg" }
-        ];
-
         let cart = [];
 
         function findProduct(id) { 
@@ -650,7 +637,7 @@
 
             container.innerHTML = itemsHtml;
 
-            const servicio = subtotal * 0.10;
+            const servicio = subtotal * 0.13;
             const total = subtotal + servicio;
             summaryDiv.innerHTML = `
                 <div class="flex justify-between font-label-md text-label-md text-secondary/60">
@@ -747,7 +734,7 @@
                     }
                 });
 
-                const servicio = subtotal * 0.10;
+                const servicio = subtotal * 0.13;
                 const total = subtotal + servicio;
 
                 message += "--------------------------------\n";
