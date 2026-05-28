@@ -24,7 +24,7 @@ const translations = {
         copyright: "© 2026 Niebla Gourmet. Todos los derechos reservados.",
         // menu.html keys
         menu_subtitle: "Creados por la chef Kim. Una experiencia sensorial que honra el bosque nuboso de Monteverde y sus sabores más auténticos.",
-        menu_desc: 'Incluye café de especialidad, jugo de naranja fresco o té de la casa.',
+        menu_desc: 'Incluye café de especialidad, jugo y fruta de temporada.',
         your_order: "Tu Pedido",
         empty_cart: "Tu pedido está vacío.<br>Agrega delicias del menú.",
         place_order: "Realizar Pedido",
@@ -67,7 +67,7 @@ const translations = {
         copyright: "© 2026 Niebla Gourmet. All rights reserved.",
         // menu.html keys
         menu_subtitle: "Created by Chef Kim. A sensory experience that honors the cloud forest of Monteverde and its most authentic flavors.",
-        menu_desc: 'Includes specialty coffee, fresh orange juice, or house tea.',
+        menu_desc: 'Includes specialty coffee, juice, and seasonal fruit.',
         your_order: "Your Order",
         empty_cart: "Your order is empty.<br>Add delicacies from the menu.",
         place_order: "Place Order",
@@ -110,7 +110,7 @@ const translations = {
         copyright: "© 2026 Niebla Gourmet. Tous droits réservés.",
         // menu.html keys
         menu_subtitle: "Créés par la chef Kim. Une expérience sensorielle honrant la forêt nuageuse de Monteverde et ses saveurs les plus authentiques.",
-        menu_desc: 'Comprend un café de spécialité, du jus d\'orange frais ou du thé maison.',
+        menu_desc: 'Comprend un café de spécialité, du jus et des fruits de saison.',
         your_order: "Votre Commande",
         empty_cart: "Votre commande est vide.<br>Ajoutez des délices du menu.",
         place_order: "Passer la Commande",
@@ -153,7 +153,7 @@ const translations = {
         copyright: "© 2026 Niebla Gourmet. Alle Rechte vorbehalten.",
         // menu.html keys
         menu_subtitle: "Von Chefin Kim kreiert. Ein sensorisches Erlebnis, das den Nebelwald von Monteverde und seine authentischsten Aromen ehrt.",
-        menu_desc: 'Enthält Spezialitätenkaffee, frischen Orangensaft oder Haustee.',
+        menu_desc: 'Enthält Spezialitätenkaffee, Saft und saisonale Früchte.',
         your_order: "Ihre Bestellung",
         empty_cart: "Ihre Bestellung ist leer.<br>Fügen Sie Köstlichkeiten aus der Speisekarte hinzu.",
         place_order: "Bestellung aufgeben",
@@ -196,7 +196,7 @@ const translations = {
         copyright: "© 2026 Niebla Gourmet. Todos os direitos reservados.",
         // menu.html keys
         menu_subtitle: "Criado pela chef Kim. Uma experiência sensorial que honra a floresta nublada de Monteverde e seus sabores mais auténticos.",
-        menu_desc: 'Inclui café especial, suco de laranja fresco ou chá da casa.',
+        menu_desc: 'Inclui café especial, suco e frutas de temporada.',
         your_order: "Seu Pedido",
         empty_cart: "Seu pedido está vazio.<br>Adicione delícias do menu.",
         place_order: "Fazer Pedido",
